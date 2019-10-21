@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<project name="Socket" default="war">
+
+    <path id="compile.classpath">
+        <fileset dir="WEB-INF/lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <mkdir dir="dist" />
+    </target>
+
+    <target name="compile" depends="init" >
+        <javac destdir="build/classes" debug="true" srcdir="src">
+            <classpath refid="compile.classpath"/>
+        </javac>
+    </target>
+
+    <target name="war" depends="compile">
+        <war destfile="dist/Socket.war" webxml="WEB-INF/web.xml">
+            <fileset dir="./"/>
+            <lib dir="WEB-INF/lib"/>
+            <classes dir="build/classes"/>
+        </war>
+        <copy file = "dist/Socket.war" tofile = "C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Socket.war"></copy>
+        <delete dir="dist" />
+        <delete dir="build" />
+    </target>
+
+    <target name="clean">
+        <delete dir="dist" />
+        <delete dir="build" />
+    </target>
+
+</project>
